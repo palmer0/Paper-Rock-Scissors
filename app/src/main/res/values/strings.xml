@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Paper-Rock-Scissors</string>
+
+    <string name="player1_title">Paper-Rock-Scissors: Player 1</string>
+    <string name="player2_title">Paper-Rock-Scissors: Player 2</string>
+
+</resources>
