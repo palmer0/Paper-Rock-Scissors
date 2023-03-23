@@ -25,7 +25,7 @@ public class Player2Activity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_player2);
-    getSupportActionBar().setTitle(R.string.app_name);
+    getSupportActionBar().setTitle(R.string.player2_title);
 
     // Log.e(TAG, "onCreate()");
 
