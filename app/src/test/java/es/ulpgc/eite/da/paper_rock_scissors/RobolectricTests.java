@@ -234,49 +234,6 @@ public class RobolectricTests {
 
    }
 
-   /*
-   @Test
-   public void t06ClickPlayer2BackButtonNotShouldUpdatePlayer2Option() {
-
-      // Given
-
-      Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
-      player1Button.performClick();
-
-      player2ActivityCtrl = Robolectric
-          .buildActivity(Player2Activity.class)
-          .create().resume().visible();
-
-      player2Activity = player2ActivityCtrl.get();
-
-      Button player2Button = player2Activity.findViewById(R.id.player2Rock);
-      player2Button.performClick();
-
-      player1ActivityCtrl.resume().visible();
-
-      player1Button = player1Activity.findViewById(R.id.player1Paper);
-      player1Button.performClick();
-
-      // When
-
-      player2ActivityCtrl = Robolectric
-          .buildActivity(Player2Activity.class)
-          .create().resume().visible();
-
-      player2Activity = player2ActivityCtrl.get();
-
-      player2Activity.onBackPressed();
-
-      player1ActivityCtrl.resume().visible();
-
-      // Then
-
-      TextView player2Option = player1Activity.findViewById(R.id.player2Option);
-      assertEquals("Rock", player2Option.getText().toString());
-
-   }
-
-   */
    
    // ---------------  With Rotation ----------------
 
@@ -456,57 +413,4 @@ public class RobolectricTests {
    }
 
 
-   /*
-   @Test
-   public void t12ClickPlayer2BackButtonNotShouldUpdatePlayer2OptionWithRotation() {
-
-      // Given
-
-      rotatePlayer1Activity();
-
-      Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
-      player1Button.performClick();
-
-      player2ActivityCtrl = Robolectric
-          .buildActivity(Player2Activity.class)
-          .create().resume().visible();
-
-      player2Activity = player2ActivityCtrl.get();
-
-      rotatePlayer2Activity();
-
-      Button player2Button = player2Activity.findViewById(R.id.player2Rock);
-      player2Button.performClick();
-
-      player1ActivityCtrl.resume().visible();
-
-      rotatePlayer1Activity();
-
-      player1Button = player1Activity.findViewById(R.id.player1Paper);
-      player1Button.performClick();
-
-      // When
-
-      player2ActivityCtrl = Robolectric
-          .buildActivity(Player2Activity.class)
-          .create().resume().visible();
-
-      player2Activity = player2ActivityCtrl.get();
-
-      rotatePlayer2Activity();
-
-      player2Activity.onBackPressed();
-
-      player1ActivityCtrl.resume().visible();
-
-      rotatePlayer1Activity();
-
-      // Then
-
-      TextView player2Option = player1Activity.findViewById(R.id.player2Option);
-      assertEquals("Rock", player2Option.getText().toString());
-
-   }
-
-   */
 }
