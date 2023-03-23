@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Player1Activity">
+    tools:context=".player1.Player1Activity">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -29,24 +29,13 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--
-
-        <Button
-            android:id="@+id/buttonPlay"
-            android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Play"
-            android:onClick="onPlayButtonClicked"/>
-
-        -->
 
         <Button
             android:id="@+id/player1Rock"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rock"
+            android:text="Take Rock"
             android:onClick="onRockButtonClicked"/>
 
         <Button
@@ -54,7 +43,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Paper"
+            android:text="Take Paper"
             android:onClick="onPaperButtonClicked"/>
 
         <Button
@@ -62,7 +51,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Scissors"
+            android:text="Take Scissors"
             android:onClick="onScissorsButtonClicked"/>
 
 
