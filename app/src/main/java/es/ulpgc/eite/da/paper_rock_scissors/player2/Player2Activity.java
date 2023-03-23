@@ -17,7 +17,6 @@ import es.ulpgc.eite.da.paper_rock_scissors.R;
 public class Player2Activity
     extends AppCompatActivity implements Player2Contract.View {
 
-  //public static String TAG = Player2Activity.class.getSimpleName();
   public static String TAG = "Paper-Rock-Scissors.Player2Activity";
 
   private Player2Contract.Presenter presenter;
@@ -98,7 +97,6 @@ public class Player2Activity
     presenter.onButtonClicked("?");
 
   }
-
 
 
   @Override

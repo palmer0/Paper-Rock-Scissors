@@ -27,7 +27,6 @@ import es.ulpgc.eite.da.paper_rock_scissors.player1.Player1Activity;
 import es.ulpgc.eite.da.paper_rock_scissors.player2.Player2Activity;
 
 @RunWith(RobolectricTestRunner.class)
-//@Config(sdk = {Config.OLDEST_SDK, Config.NEWEST_SDK})
 @Config(sdk = {Config.OLDEST_SDK})
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RobolectricTests {
@@ -81,12 +80,6 @@ public class RobolectricTests {
 
       AppMediator.resetInstance();
 
-      /*
-      player1Activity = Robolectric
-          .buildActivity(Player1Activity.class)
-          .create().resume().visible().get();
-      */
-
       player1ActivityCtrl = Robolectric
           .buildActivity(Player1Activity.class)
           .create().resume().visible();
@@ -111,11 +104,6 @@ public class RobolectricTests {
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
 
-      /*
-      Player2Activity player2Activity = Robolectric
-          .buildActivity(Player2Activity.class)
-          .create().resume().visible().get();
-      */
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)

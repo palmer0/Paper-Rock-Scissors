@@ -48,11 +48,6 @@ public class AppMediator {
     mPlayer1State = state;
   }
 
-  /*
-  public void resetPlayer1ScreenState() {
-    mPlayer1State = null;
-  }
-  */
 
   public Player2State getPlayer2ScreenState() {
     return mPlayer2State;
@@ -61,12 +56,6 @@ public class AppMediator {
   public void setPlayer2ScreenState(Player2State state) {
     mPlayer2State=state;
   }
-
-  /*
-  public void resetPlayer2ScreenState() {
-    mPlayer2State=null;
-  }
-  */
 
   public void setPlayer1ToPlayer2ScreenState(Player1ToPlayer2State state) {
     mPlayer1ToPlayer2State = state;

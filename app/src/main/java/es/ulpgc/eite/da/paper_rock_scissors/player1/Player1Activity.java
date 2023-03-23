@@ -18,7 +18,6 @@ import es.ulpgc.eite.da.paper_rock_scissors.R;
 public class Player1Activity
     extends AppCompatActivity implements Player1Contract.View {
 
-  //public static String TAG = Player1Activity.class.getSimpleName();
   public static String TAG = "Paper-Rock-Scissors.Player1Activity";
 
   private Player1Contract.Presenter presenter;
@@ -27,7 +26,6 @@ public class Player1Activity
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_player1);
-    //getSupportActionBar().setTitle(R.string.app_name);
     getSupportActionBar().setTitle(R.string.player1_title);
 
     // Log.e(TAG, "onCreate()");
@@ -82,56 +80,22 @@ public class Player1Activity
 
 
   public void onRockButtonClicked(View view) {
-    //startActivityForResultWithExtra("Rock");
     presenter.onButtonClicked("Rock");
-
-    /*
-    Intent intent = new Intent(this, Player2Activity.class);
-    intent.putExtra("player1_option", "Rock");
-    startActivityForResult(intent, 1);
-    */
   }
 
   public void onPaperButtonClicked(View view) {
-    //startActivityForResultWithExtra("Paper");
     presenter.onButtonClicked("Paper");
 
-    /*
-    Intent intent = new Intent(this, Player2Activity.class);
-    intent.putExtra("player1_option", "Paper");
-    startActivityForResult(intent, 1);
-    */
   }
 
   public void onScissorsButtonClicked(View view) {
-    //startActivityForResultWithExtra("Scissors");
     presenter.onButtonClicked("Scissors");
 
-    /*
-    Intent intent = new Intent(this, Player2Activity.class);
-    intent.putExtra("player1_option", "Scissors");
-    startActivityForResult(intent, 1);
-    */
   }
 
   public void onPassTurnButtonClicked(View view) {
-    //startActivityForResultWithExtra("?");
     presenter.onButtonClicked("?");
-
-    /*
-    Intent intent = new Intent(this, Player2Activity.class);
-    intent.putExtra("player1_option", "?");
-    startActivityForResult(intent, 1);
-    */
   }
-
-  /*
-  private void startActivityForResultWithExtra(String value) {
-    Intent intent = new Intent(this, Player2Activity.class);
-    intent.putExtra("player1_option", value);
-    startActivityForResult(intent, 1);
-  }
-  */
 
   @Override
   public void onViewModelDataUpdated(Player1ViewModel viewModel) {

@@ -6,16 +6,10 @@ package es.ulpgc.eite.da.paper_rock_scissors.player1;
 
 public class Player1Model implements Player1Contract.Model {
 
-  //public static String TAG = Player1Model.class.getSimpleName();
   public static String TAG = "Paper-Rock-Scissors.Player1Model";
 
   private String playerOption;
 
-  /*
-  public Player1Model(String playerOption) {
-    this.playerOption = playerOption;
-  }
-  */
 
   public Player1Model() {
     this.playerOption = "?";

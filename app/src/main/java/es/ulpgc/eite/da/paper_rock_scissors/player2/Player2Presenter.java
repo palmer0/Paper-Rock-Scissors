@@ -15,7 +15,6 @@ import es.ulpgc.eite.da.paper_rock_scissors.game.Player2ToPlayer1State;
 
 public class Player2Presenter implements Player2Contract.Presenter {
 
-  //public static String TAG = Player2Presenter.class.getSimpleName();
   public static String TAG = "Paper-Rock-Scissors.Player2Presenter";
 
   private WeakReference<Player2Contract.View> view;
@@ -25,7 +24,6 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
   public Player2Presenter(AppMediator mediator) {
     this.mediator = mediator;
-    //state = mediator.getPlayer2State();
   }
 
   @Override
@@ -34,18 +32,13 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
     // call the mediator initialize the state
     state = new Player2State();
-    //state = getScreenState();
 
     // call the model and initialize the state
     state.playerOption = model.getStoredData();
 
     // use passed state if is necessary
     Player1ToPlayer2State savedState=mediator.getPlayer1ToPlayer2ScreenState();
-    //Player1ToPlayer2State savedState = getStateFromPreviousScreen();
     if (savedState != null) {
-
-      // update the model if is necessary
-      //model.onUpdatedDataFromPreviousScreen(savedState.playerOption);
 
       // update the state if is necessary
       state.playerOption = savedState.playerOption;
@@ -58,36 +51,12 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
     // call the mediator initialize the state
     state=mediator.getPlayer2ScreenState();
-    //state = getScreenState();
 
-    // update the model if is necessary
-    //model.onUpdatedDataFromRestartedScreen(state.playerOption);
   }
 
   @Override
   public void onResume() {
     Log.e(TAG, "onResume()");
-
-    /*
-    // call the model and update the state if is necessary
-    String data = model.getUpdatedDataDuringPause();
-    if (data != null) {
-      state.playerOption = data;
-    }
-    */
-
-    /*
-    // use passed state if is necessary
-    NextToPlayer2State savedState = getStateFromNextScreen();
-    if (savedState != null) {
-
-      // update the model if is necessary
-      model.onUpdatedDataFromNextScreen(savedState.data);
-
-      // update the state if is necessary
-      state.data = savedState.data;
-    }
-    */
 
     // update the view
     view.get().onViewModelDataUpdated(state);
@@ -100,7 +69,6 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
     Player2ToPlayer1State newState = new Player2ToPlayer1State();
     newState.playerOption= "?";
-    //passStateToPreviousScreen(newState);
     mediator.setPlayer2ToPlayer1ScreenState(newState);
   }
 
@@ -110,15 +78,12 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
     // update the state
     mediator.setPlayer2ScreenState(state);
-    //setScreenState(state);
   }
 
   @Override
   public void onDestroy() {
     Log.e(TAG, "onDestroy()");
 
-    // reset the state if is necessary
-    //resetScreenState();
   }
 
   @Override
@@ -127,44 +92,9 @@ public class Player2Presenter implements Player2Contract.Presenter {
 
     Player2ToPlayer1State newState = new Player2ToPlayer1State();
     newState.playerOption= option;
-    //passStateToPreviousScreen(newState);
     mediator.setPlayer2ToPlayer1ScreenState(newState);
     view.get().navigateToPreviousScreen();
   }
-
-  /*
-  private Player2State getScreenState() {
-    return mediator.getPlayer2ScreenState();
-  }
-
-  private void setScreenState(Player2State state) {
-    mediator.setPlayer2ScreenState(state);
-  }
-
-
-  private void passStateToPreviousScreen(Player2ToPlayer1State state) {
-    mediator.setPlayer2ToPlayer1ScreenState(state);
-  }
-
-  private Player1ToPlayer2State getStateFromPreviousScreen() {
-    return mediator.getPlayer1ToPlayer2ScreenState();
-  }
-  */
-
-
-  /*
-  private void resetScreenState() {
-    mediator.resetPlayer2ScreenState();
-  }
-
-  private NextToPlayer2State getStateFromNextScreen() {
-    return mediator.getNextPlayer2ScreenState();
-  }
-
-  private void passStateToNextScreen(Player2ToNextState state) {
-    mediator.setNextPlayer2ScreenState(state);
-  }
-  */
 
 
   @Override
