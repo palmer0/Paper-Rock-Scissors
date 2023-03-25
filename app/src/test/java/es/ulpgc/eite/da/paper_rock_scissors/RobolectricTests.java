@@ -95,7 +95,9 @@ public class RobolectricTests {
    @Test
    public void t01CheckInitialPlayer2OptionIsEmpty() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+
+      // THEN La opcion elegida por el "player2" deberia ser desconocida 
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
@@ -106,11 +108,16 @@ public class RobolectricTests {
    @Test
    public void t02ClickPlayer1ScissorsButtonShouldUpdatePlayer1Option() {
 
-      // When
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      
+      // WHEN Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
 
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
 
+      // THEN Se deberia crear y resumir la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" deberia ser "Scissors"
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -118,7 +125,6 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
-      // Then
 
       TextView player1Option = player2Activity.findViewById(R.id.player1Option);
       assertThat(player1Option.getText().toString(), equalTo("Scissors"));
@@ -130,18 +136,22 @@ public class RobolectricTests {
    @Test
    public void t03ClickPlayer1ScissorsButtonShouldResetPlayer1Option() {
 
-      // When
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
 
+      // WHEN Se pulsa el botón "Pass Turn" en la pantalla "Player 1"
+      
       Button player1Button = player1Activity.findViewById(R.id.player1PassTurn);
       player1Button.performClick();
 
+      // THEN Se deberia crear y resumir la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" deberia ser desconocida
+      
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
           .create().resume().visible();
 
       player2Activity = player2ActivityCtrl.get();
-
-      // Then
 
       TextView player1Option = player2Activity.findViewById(R.id.player1Option);
       assertThat(player1Option.getText().toString(), equalTo("?"));
@@ -152,12 +162,14 @@ public class RobolectricTests {
    @Test
    public void t04ClickPlayer2RockButtonShouldUpdatePlayer2Option() {
 
-      // Given
-
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" es "Scissors"
+      
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
-
-      // When
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -165,12 +177,16 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
+      // WHEN Se pulsa el botón "Take Rock" en la pantalla "Player 2"
+
       Button player2Button = player2Activity.findViewById(R.id.player2Rock);
       player2Button.performClick();
 
-      player1ActivityCtrl.resume().visible();
+      // THEN Se deberia pausar y destruir la pantalla "Player 2"
+      // AND Se deberia resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia "Rock"
 
-      // Then
+      player1ActivityCtrl.resume().visible();
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("Rock", player2Option.getText().toString());
@@ -182,12 +198,15 @@ public class RobolectricTests {
    @Test
    public void t05ClickPlayer2PassTurnButtonShouldResetPlayer2Option() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" es "Scissors"
 
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
 
-      // When
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -195,12 +214,16 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
+      // WHEN Se pulsa el botón "Pass Turn" en la pantalla "Player 2"
+
       Button player2Button = player2Activity.findViewById(R.id.player2PassTurn);
       player2Button.performClick();
 
+      // THEN Se deberia pausar y destruir la pantalla "Player 2"
+      // AND Se deberia resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser desconocida
+      
       player1ActivityCtrl.resume().visible();
-
-      // Then
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
@@ -210,12 +233,15 @@ public class RobolectricTests {
    @Test
    public void t06ClickPlayer2BackButtonNotShouldUpdatePlayer2Option() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" es "Scissors"
 
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
 
-      // When
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -223,11 +249,15 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
+      // WHEN Se pulsa el botón "Back" en la pantalla "Player 2"
+      
       player2Activity.onBackPressed();
 
+      // THEN Se deberia pausar y destruir la pantalla "Player 2"
+      // AND Se deberia resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser desconocida
+      
       player1ActivityCtrl.resume().visible();
-
-      // Then
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
@@ -240,11 +270,17 @@ public class RobolectricTests {
    @Test
    public void t07CheckInitialPlayer2OptionIsEmptyWithRotation() {
 
-      // When
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
 
+      
+      // WHEN Se rota la pantalla "Player 1"
+      
       rotatePlayer1Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 1"
+      // AND Se deberia crear y resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser desconocida
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
@@ -254,14 +290,18 @@ public class RobolectricTests {
    @Test
    public void t08ClickPlayer1ScissorsButtonShouldUpdatePlayer1OptionWithRotation() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se rota la pantalla "Player 1"
+      // AND Se pausa y destruye la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 1"
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
 
       rotatePlayer1Activity();
 
       Button player1Button = player1Activity.findViewById(R.id.player1Scissors);
       player1Button.performClick();
-
-      // When
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -269,9 +309,13 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
+      // WHEN Se rota la pantalla "Player 2"
+
       rotatePlayer2Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 2"
+      // AND Se deberia crear y resumir la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" deberia ser "Scissors"
 
       TextView player1Option = player2Activity.findViewById(R.id.player1Option);
       assertThat(player1Option.getText().toString(), equalTo("Scissors"));
@@ -282,14 +326,18 @@ public class RobolectricTests {
    @Test
    public void t09ClickPlayer1ScissorsButtonShouldResetPlayer1OptionWithRotation() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se rota la pantalla "Player 1"
+      // AND Se pausa y destruye la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 1"
+      // AND Se pulsa el botón "Pass Turn" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
 
       rotatePlayer1Activity();
 
       Button player1Button = player1Activity.findViewById(R.id.player1PassTurn);
       player1Button.performClick();
-
-      // When
 
       player2ActivityCtrl = Robolectric
           .buildActivity(Player2Activity.class)
@@ -297,9 +345,13 @@ public class RobolectricTests {
 
       player2Activity = player2ActivityCtrl.get();
 
+      // WHEN Se rota la pantalla "Player 2"
+
       rotatePlayer2Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 2"
+      // AND Se deberia crear y resumir la pantalla "Player 2"
+      // AND La opcion elegida por el "player1" deberia ser desconocida
 
       TextView player1Option = player2Activity.findViewById(R.id.player1Option);
       assertThat(player1Option.getText().toString(), equalTo("?"));
@@ -310,7 +362,19 @@ public class RobolectricTests {
    @Test
    public void t10ClickPlayer2RockButtonShouldUpdatePlayer2OptionWithRotation() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se rota la pantalla "Player 1"
+      // AND Se pausa y destruye la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 1"
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se rota la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se pulsa el botón "Take Rock" en la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se resume la pantalla "Player 1"
 
       rotatePlayer1Activity();
 
@@ -330,13 +394,16 @@ public class RobolectricTests {
       player2Button.performClick();
 
 
-      // When
-
       player1ActivityCtrl.resume().visible();
+
+      // WHEN Se rota la pantalla "Player 1"
 
       rotatePlayer1Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 1"
+      // AND Se deberia crear y resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser "Rock"
+
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("Rock", player2Option.getText().toString());
@@ -348,7 +415,20 @@ public class RobolectricTests {
    @Test
    public void t11ClickPlayer2PassTurnButtonShouldResetPlayer2OptionWithRotation() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se rota la pantalla "Player 1"
+      // AND Se pausa y destruye la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 1"
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se rota la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se pulsa el botón "Pass Turn" en la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se resume la pantalla "Player 1"
+
 
       rotatePlayer1Activity();
 
@@ -366,13 +446,15 @@ public class RobolectricTests {
       Button player2Button = player2Activity.findViewById(R.id.player2PassTurn);
       player2Button.performClick();
 
-      // When
-
       player1ActivityCtrl.resume().visible();
 
+      // WHEN Se rota la pantalla "Player 1"
+      
       rotatePlayer1Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 1"
+      // AND Se deberia crear y resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser desconocida
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
@@ -382,7 +464,20 @@ public class RobolectricTests {
    @Test
    public void t12ClickPlayer2BackButtonNotShouldUpdatePlayer2OptionWithRotation() {
 
-      // Given
+      // GIVEN Se inicia la app y se crea y resume la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" es desconocida
+      // AND Se rota la pantalla "Player 1"
+      // AND Se pausa y destruye la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 1"
+      // AND Se pulsa el botón "Take Scissors" en la pantalla "Player 1"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se rota la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se crea y resume la pantalla "Player 2"
+      // AND Se pulsa el botón "Back" en la pantalla "Player 2"
+      // AND Se pausa y destruye la pantalla "Player 2"
+      // AND Se resume la pantalla "Player 1"
+
 
       rotatePlayer1Activity();
 
@@ -399,13 +494,15 @@ public class RobolectricTests {
 
       player2Activity.onBackPressed();
 
-      // When
-
       player1ActivityCtrl.resume().visible();
 
+      // WHEN Se rota la pantalla "Player 1"
+      
       rotatePlayer1Activity();
 
-      // Then
+      // THEN Se deberia pausar y destruir la pantalla "Player 1"
+      // AND Se deberia crear y resumir la pantalla "Player 1"
+      // AND La opcion elegida por el "player2" deberia ser desconocida
 
       TextView player2Option = player1Activity.findViewById(R.id.player2Option);
       assertEquals("?", player2Option.getText().toString());
